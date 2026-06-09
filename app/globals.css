@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Konrad Feder — Design Tokens (dunkler Industrie-Look)
+   ============================================================ */
+@theme {
+  /* Helles Theme — weiße Grundfarbe, Logo-Dunkelblau als Akzent */
+  --color-ink: #ffffff;        /* Grundfarbe / Page-BG (weiß) */
+  --color-ink-2: #f3f6f8;      /* helle Alt-Sektion */
+  --color-ink-3: #ffffff;      /* Cards (weiß, mit Rahmen) */
+  --color-paper: #eef2f4;      /* zweite helle Sektion (kühles Off-White) */
+  --color-paper-2: #e4e9ec;    /* Surface hell */
+  --color-fg: #16222e;         /* Haupttext / Überschriften (dunkel) */
+  --color-fg-ink: #16222e;     /* Text auf hell (= fg) */
+  --color-muted: #5d6b78;      /* gedämpfter Text */
+  --color-muted-ink: #5d6b78;  /* gedämpfter Text (= muted) */
+  --color-accent: #1e3a72;     /* sauberes Dunkelblau (Highlight) */
+  --color-accent-2: #2f5aa0;   /* helleres Blau (Hover/Links) */
+  --color-navy: #1e3a72;       /* Dunkelblau */
+  --color-dark: #111d28;       /* dunkle Kontrast-Sektion (Footer/CTA) */
+  --color-line: rgba(20, 35, 50, 0.12);
+  --color-line-ink: rgba(20, 35, 50, 0.12);
+
+  --font-display: var(--font-space), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Base ---------- */
+* {
+  border-color: var(--color-line);
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* dunkle Kontrast-Sektion: heller Text */
+.section-dark {
+  background: var(--color-dark);
+  color: #eef2f4;
+}
+
+/* ---------- Typo-Helfer ---------- */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 0.98;
+}
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-accent);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: var(--color-accent);
+  display: inline-block;
+}
+/* Eyebrow auf dunklem Hintergrund */
+.eyebrow.is-light {
+  color: #a9c0d8;
+}
+.eyebrow.is-light::before {
+  background: #a9c0d8;
+}
+
+/* fluid display sizes */
+.h-hero {
+  font-size: clamp(2.6rem, 7vw, 6rem);
+}
+.h-section {
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+}
+
+/* ---------- Buttons (Pills) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  padding: 0.95rem 1.7rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: all 0.4s var(--ease-signature);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-accent-2);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px -12px rgba(39, 55, 72, 0.5);
+}
+/* heller Ghost-Button (auf weißem BG) */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-fg);
+  border: 1px solid var(--color-line);
+}
+.btn-ghost:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+/* Ghost-Button auf dunklem BG (Footer/CTA/Hero) */
+.btn-ghost-light {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(6px);
+}
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+.btn-dark {
+  background: var(--color-dark);
+  color: #fff;
+}
+.btn-dark:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+}
+/* weißer Button auf dunklen Sektionen */
+.btn-white {
+  background: #fff;
+  color: var(--color-accent);
+}
+.btn-white:hover {
+  background: var(--color-accent-2);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ---------- Layout ---------- */
+.container-x {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1.2rem, 4vw, 3rem);
+}
+.section-y {
+  padding-block: clamp(4.5rem, 9vw, 9rem);
+}
+
+/* ---------- Reveal-Animation ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(6px);
+  transition: opacity 0.9s var(--ease-signature), transform 0.9s var(--ease-signature),
+    filter 0.9s var(--ease-signature);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* ---------- Ken-Burns (Hero) ---------- */
+@keyframes kenburns {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.15) translate(-1%, -1%);
+  }
+}
+
+/* ---------- Marquee (Referenz-Logos) ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ---------- Card Hover ---------- */
+.card-lift {
+  transition: transform 0.5s var(--ease-signature), box-shadow 0.5s var(--ease-signature),
+    border-color 0.5s var(--ease-signature);
+}
+.card-lift:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+}
+.img-zoom {
+  transition: transform 0.7s var(--ease-signature);
+}
+.group:hover .img-zoom {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
