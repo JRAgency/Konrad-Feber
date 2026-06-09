@@ -45,7 +45,7 @@ export default function Logo({
       )}
       <span
         aria-hidden="true"
-        style={{ ...mask("/logo-schrift.webp"), width: `${wordW}px`, height: `${wordH}px`, display: "inline-block" }}
+        style={{ ...mask("/logo-schrift-mask.png"), width: `${wordW}px`, height: `${wordH}px`, display: "inline-block" }}
       />
       <span className="sr-only">Konrad Feder Werkzeug-Präzisions-Montage</span>
     </Link>
