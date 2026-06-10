@@ -1,17 +1,19 @@
 import Link from "next/link";
 
 // Konrad-Feder-Logo, monochrom eingefärbt via CSS-Maske (Alpha der Original-Assets).
-// tone="dark"  → Dunkelblau (Akzent) auf hellem Hintergrund (Header).
-// tone="light" → Weiß auf dunklem Hintergrund (Footer).
-// showFeather=false → nur Schriftzug.
+// tone="dark"  → Dunkelblau (Akzent) auf hellem Hintergrund (Header gescrollt).
+// tone="light" → Weiß auf dunklem Hintergrund (Hero/Footer).
+// size="md" Header · size="lg" Footer.
 export default function Logo({
   className = "",
   tone = "light",
   showFeather = true,
+  size = "md",
 }: {
   className?: string;
   tone?: "light" | "dark";
   showFeather?: boolean;
+  size?: "md" | "lg";
 }) {
   const color = tone === "light" ? "#ffffff" : "var(--color-accent)";
 
@@ -28,24 +30,36 @@ export default function Logo({
   });
 
   // Höhen/Breiten aus den Original-Seitenverhältnissen (Feder 300×582, Schrift 199×40)
-  const wordH = showFeather ? 26 : 32;
+  const wordH = size === "lg" ? 40 : showFeather ? 32 : 36;
+  const featherH = size === "lg" ? 72 : 56;
   const wordW = Math.round((wordH * 199) / 40);
+  const featherW = Math.round((featherH * 300) / 582);
 
   return (
     <Link
       href="/"
       aria-label="Konrad Feder – Startseite"
-      className={`inline-flex items-center gap-2.5 ${className}`}
+      className={`inline-flex items-center gap-3 ${className}`}
     >
       {showFeather && (
         <span
           aria-hidden="true"
-          style={{ ...mask("/logo-feder.png"), width: "23px", height: "44px", display: "inline-block" }}
+          style={{
+            ...mask("/logo-feder.png"),
+            width: `${featherW}px`,
+            height: `${featherH}px`,
+            display: "inline-block",
+          }}
         />
       )}
       <span
         aria-hidden="true"
-        style={{ ...mask("/logo-schrift-mask.png"), width: `${wordW}px`, height: `${wordH}px`, display: "inline-block" }}
+        style={{
+          ...mask("/logo-schrift-mask.png"),
+          width: `${wordW}px`,
+          height: `${wordH}px`,
+          display: "inline-block",
+        }}
       />
       <span className="sr-only">Konrad Feder Werkzeug-Präzisions-Montage</span>
     </Link>

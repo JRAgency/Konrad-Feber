@@ -156,9 +156,48 @@ export const referenceLogos = [
 
 export const stats = [
   { value: 40, suffix: "+", label: "Jahre Erfahrung" },
-  { value: 6, suffix: " μm", label: "kleinste Toleranz" },
-  { value: 100, suffix: "%", label: "Qualitäts­prüfung" },
-  { value: 3, suffix: ",5 J", label: "Ausbildungszeit" },
+  { value: 2, suffix: " μm", label: "feinste Toleranz" },
+  { value: 100, suffix: " %", label: "Qualitäts­prüfung" },
+  { value: 4, suffix: "", label: "Kern­verfahren" },
+];
+
+// Lauftext-Begriffe (Ticker unter dem Hero)
+export const ticker = [
+  "CNC-Drehen",
+  "CNC-Fräsen",
+  "Flachschleifen",
+  "Rundschleifen",
+  "Koordinatenschleifen",
+  "Werkzeugbau",
+  "Präzisionsmontage",
+];
+
+// Branchen, für die gefertigt wird (Startseite + Referenzen)
+export const branchen = [
+  {
+    title: "Automobilindustrie",
+    text: "Präzisionsbauteile, Vorrichtungen und Werkzeuge für Hersteller und Zulieferer – maßhaltig und reproduzierbar in Serie.",
+    image: "/img/detail-revolver.jpg",
+  },
+  {
+    title: "Bahntechnik",
+    text: "Zuverlässige, dokumentierte Komponenten für den anspruchsvollen Einsatz im Schienenverkehr – u. a. für die Deutsche Bahn.",
+    image: "/img/detail-funken.jpg",
+  },
+  {
+    title: "Maschinen- & Anlagenbau",
+    text: "Einzelteile, Ersatzteile und komplette Baugruppen für Sondermaschinen und industrielle Anlagen.",
+    image: "/img/detail-drehen.jpg",
+  },
+];
+
+// Karriere-Einstiege (Teaser Startseite, Detail auf /karriere)
+export const lehrjahrStart = "01.09.2026";
+export const karriereWege = [
+  "Ausbildung zum Werkzeugmechaniker",
+  "Ausbildung Kaufmann/-frau für Büromanagement",
+  "Schülerpraktikum",
+  "Studentenpraktikum",
 ];
 
 export const processSteps = [

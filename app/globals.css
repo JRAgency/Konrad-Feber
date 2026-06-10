@@ -1,25 +1,35 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Konrad Feder — Design Tokens (dunkler Industrie-Look)
+   Konrad Feder — Design Tokens
+   Cinematic-Industrial: dunkle Bild-Sektionen (Hero/CTA/Branchen)
+   im Wechsel mit hellen, klaren Inhalts-Sektionen.
    ============================================================ */
 @theme {
-  /* Helles Theme — weiße Grundfarbe, Logo-Dunkelblau als Akzent */
-  --color-ink: #ffffff;        /* Grundfarbe / Page-BG (weiß) */
-  --color-ink-2: #f3f6f8;      /* helle Alt-Sektion */
+  /* Helle Basis */
+  --color-ink: #ffffff;        /* Page-BG */
+  --color-ink-2: #f2f5f7;      /* helle Alt-Sektion */
   --color-ink-3: #ffffff;      /* Cards (weiß, mit Rahmen) */
-  --color-paper: #eef2f4;      /* zweite helle Sektion (kühles Off-White) */
-  --color-paper-2: #e4e9ec;    /* Surface hell */
-  --color-fg: #16222e;         /* Haupttext / Überschriften (dunkel) */
-  --color-fg-ink: #16222e;     /* Text auf hell (= fg) */
-  --color-muted: #5d6b78;      /* gedämpfter Text */
-  --color-muted-ink: #5d6b78;  /* gedämpfter Text (= muted) */
-  --color-accent: #1e3a72;     /* sauberes Dunkelblau (Highlight) */
-  --color-accent-2: #2f5aa0;   /* helleres Blau (Hover/Links) */
-  --color-navy: #1e3a72;       /* Dunkelblau */
-  --color-dark: #111d28;       /* dunkle Kontrast-Sektion (Footer/CTA) */
+  --color-paper: #eef2f4;      /* zweite helle Sektion */
+  --color-paper-2: #e4e9ec;
+  --color-fg: #131e2a;         /* Haupttext */
+  --color-fg-ink: #131e2a;
+  --color-muted: #57646f;      /* gedämpfter Text */
+  --color-muted-ink: #57646f;
+
+  /* Marke */
+  --color-accent: #1e3a72;     /* Logo-Dunkelblau */
+  --color-accent-2: #2f5aa0;   /* Hover-Blau */
+  --color-accent-bright: #7fb1e8; /* Akzent auf dunklem Grund */
+  --color-amber: #d98e2b;      /* Sekundär-Akzent (Karriere, von der Altseite) */
+  --color-navy: #1e3a72;
+
+  /* Dunkle Sektionen */
+  --color-dark: #0b141e;       /* tiefes Industrie-Navy */
+  --color-dark-2: #101c29;     /* Cards auf dunkel */
   --color-line: rgba(20, 35, 50, 0.12);
   --color-line-ink: rgba(20, 35, 50, 0.12);
+  --color-line-light: rgba(255, 255, 255, 0.12);
 
   --font-display: var(--font-space), system-ui, sans-serif;
   --font-body: var(--font-inter), system-ui, sans-serif;
@@ -53,6 +63,16 @@ body {
   background: var(--color-dark);
   color: #eef2f4;
 }
+.section-dark * {
+  border-color: var(--color-line-light);
+}
+
+/* feines Blueprint-Raster für dunkle Sektionen */
+.bg-blueprint {
+  background-image: linear-gradient(rgba(127, 177, 232, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 177, 232, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
 
 /* ---------- Typo-Helfer ---------- */
 .font-display {
@@ -80,18 +100,31 @@ body {
 }
 /* Eyebrow auf dunklem Hintergrund */
 .eyebrow.is-light {
-  color: #a9c0d8;
+  color: var(--color-accent-bright);
 }
 .eyebrow.is-light::before {
-  background: #a9c0d8;
+  background: var(--color-accent-bright);
+}
+/* Eyebrow in Amber (Karriere) */
+.eyebrow.is-amber {
+  color: var(--color-amber);
+}
+.eyebrow.is-amber::before {
+  background: var(--color-amber);
 }
 
 /* fluid display sizes */
 .h-hero {
-  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-size: clamp(2.8rem, 8vw, 7rem);
 }
 .h-section {
   font-size: clamp(1.9rem, 4vw, 3.4rem);
+}
+
+/* Outline-Typo (Ticker, Deko-Wörter) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
 }
 
 /* ---------- Buttons (Pills) ---------- */
@@ -163,10 +196,26 @@ body {
   transform: translateY(-2px);
 }
 
+/* ---------- Spec-Chip (technische Mini-Angabe) ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.7);
+}
+
 /* ---------- Layout ---------- */
 .container-x {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1320px;
   margin-inline: auto;
   padding-inline: clamp(1.2rem, 4vw, 3rem);
 }
@@ -195,11 +244,11 @@ body {
     transform: scale(1.05);
   }
   to {
-    transform: scale(1.15) translate(-1%, -1%);
+    transform: scale(1.16) translate(-1.2%, -1%);
   }
 }
 
-/* ---------- Marquee (Referenz-Logos) ---------- */
+/* ---------- Marquee / Ticker ---------- */
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -215,6 +264,28 @@ body {
 }
 .marquee-track:hover {
   animation-play-state: paused;
+}
+/* großer Begriffs-Ticker (schneller, Display-Typo) */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+/* ---------- Scroll-Hinweis im Hero ---------- */
+@keyframes scrollcue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.4;
+  }
+}
+.scroll-cue {
+  animation: scrollcue 2.2s var(--ease-signature) infinite;
 }
 
 /* ---------- Card Hover ---------- */

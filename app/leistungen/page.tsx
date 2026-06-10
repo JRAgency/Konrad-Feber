@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import { services } from "@/lib/site";
+import { services, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Leistungen",
@@ -19,6 +19,8 @@ export default function LeistungenPage() {
         title="Unser"
         accent="Leistungsspektrum"
         subtitle="Von der konventionellen Bearbeitung bis zur 5-Achs-CNC-Fertigung – wir decken die gesamte Kette der spanenden Metallbearbeitung ab."
+        image="/img/expertise.jpg"
+        imageAlt="CNC-Fräskopf bei der Bearbeitung eines Präzisionsteils"
       />
 
       <section className="section-y">
@@ -37,11 +39,17 @@ export default function LeistungenPage() {
                     sizes="(max-width:768px) 100vw, 40vw"
                     className="img-zoom object-cover"
                   />
+                  <span className="font-display absolute left-4 top-3 text-3xl text-white/40">
+                    0{i + 1}
+                  </span>
                 </div>
                 <div className="flex flex-1 flex-col p-7">
                   <h2 className="font-display text-2xl text-[var(--color-fg)]">{s.title}</h2>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--color-muted)]">
                     {s.excerpt}
+                  </p>
+                  <p className="mt-4 flex flex-wrap gap-2">
+                    <span className="chip">{s.specs[2]?.value ?? s.specs[0].value}</span>
                   </p>
                   <span className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-accent)]">
                     Details ansehen
@@ -53,6 +61,27 @@ export default function LeistungenPage() {
               </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-dark bg-blueprint py-16">
+        <div className="container-x flex flex-col items-center gap-6 text-center">
+          <h2 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] text-white uppercase">
+            Ihr Bauteil ist nicht dabei?
+          </h2>
+          <p className="max-w-xl text-white/70">
+            Senden Sie uns Ihre Zeichnung – wir prüfen Machbarkeit, Werkstoff und Verfahren
+            und melden uns mit einem konkreten Vorschlag.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/kontakt" className="btn btn-white">
+              Zeichnung senden
+            </Link>
+            <a href={`tel:${site.contact.phoneHref}`} className="btn btn-ghost-light">
+              {site.contact.phone}
+            </a>
+          </div>
         </div>
       </section>
     </>

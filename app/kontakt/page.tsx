@@ -19,6 +19,8 @@ export default function KontaktPage() {
         title="Sprechen wir über Ihr"
         accent="Projekt"
         subtitle="Schildern Sie uns Ihre Anforderung – wir beraten Sie persönlich zu Verfahren, Werkstoff und Machbarkeit."
+        image="/img/cnc-fraesen.jpg"
+        imageAlt="CNC-Fräsbearbeitung mit Kühlmittel"
       />
 
       <section className="section-y">

@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
-            <Logo tone="light" showFeather={false} />
+            <Logo tone="light" showFeather={false} size="lg" />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/55">
               Präzisionszerspanung &amp; Werkzeugbau aus Mittelfranken. Höchste Qualität,
               Termintreue und partnerschaftliche Zusammenarbeit seit über 40 Jahren.

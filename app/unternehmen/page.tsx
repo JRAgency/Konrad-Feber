@@ -20,14 +20,16 @@ export default function UnternehmenPage() {
         title="Präzision aus"
         accent="Mittelfranken"
         subtitle="Ein modernes Unternehmen mit Tradition – spezialisiert auf höchste Stufen der Metallbearbeitung."
+        image="/img/about.jpg"
+        imageAlt="CNC-Drehmaschine im Einsatz bei Konrad Feder"
       />
 
       <section className="section-y">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal className="group overflow-hidden rounded-3xl">
             <Image
-              src="/img/about.jpg"
-              alt="Werkstatt von Konrad Feder"
+              src="/img/cnc-fraesen.jpg"
+              alt="CNC-Bearbeitung mit Kühlmittel in der Fertigung"
               width={760}
               height={620}
               className="img-zoom h-full w-full object-cover"
@@ -94,8 +96,39 @@ export default function UnternehmenPage() {
         </div>
       </section>
 
+      {/* Einblicke in die Fertigung */}
+      <section className="bg-[var(--color-ink-2)] section-y">
+        <div className="container-x">
+          <Reveal>
+            <p className="eyebrow">Einblicke</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="font-display h-section mt-5 max-w-2xl text-[var(--color-fg)] uppercase">
+              Wo Präzision entsteht
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {[
+              { src: "/img/qualitaet.jpg", alt: "Messung eines Werkstücks mit dem digitalen Messschieber" },
+              { src: "/img/detail-drehen.jpg", alt: "Drehteil zwischen Spitzen einer Drehmaschine" },
+              { src: "/img/detail-funken.jpg", alt: "Funkenflug bei der Metallbearbeitung" },
+            ].map((img, i) => (
+              <Reveal key={img.src} delay={i * 90} className="group overflow-hidden rounded-3xl">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={600}
+                  height={750}
+                  className="img-zoom aspect-[4/5] w-full object-cover"
+                />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="section-dark py-16">
+      <section className="section-dark bg-blueprint py-16">
         <div className="container-x flex flex-col items-center gap-6 text-center">
           <h2 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] text-white uppercase">
             Lernen Sie uns kennen

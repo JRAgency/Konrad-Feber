@@ -13,6 +13,8 @@ const nav = [
   { href: "/kontakt", label: "Kontakt" },
 ];
 
+// Adaptiver Header: transparent + weiße Schrift über den dunklen Bild-Heros,
+// nach dem Scrollen weiß/blur mit dunkler Schrift.
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -28,24 +30,29 @@ export default function Header() {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  const solid = scrolled || open;
+  const linkBase = solid
+    ? "text-[var(--color-fg)]/80 hover:text-[var(--color-accent)]"
+    : "text-white/85 hover:text-white";
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open
-          ? "bg-white/90 backdrop-blur-md border-b border-[var(--color-line)]"
-          : "bg-transparent"
+        solid
+          ? "bg-white/92 backdrop-blur-md border-b border-[var(--color-line)]"
+          : "bg-gradient-to-b from-black/45 to-transparent"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(.16,1,.3,1)" }}
     >
-      <div className="container-x flex items-center justify-between h-[76px]">
-        <Logo tone="dark" />
+      <div className="container-x flex items-center justify-between h-[84px]">
+        <Logo tone={solid ? "dark" : "light"} />
 
         <nav className="hidden lg:flex items-center gap-8">
           {nav.map((item) => (
             <div key={item.href} className="relative group">
               <Link
                 href={item.href}
-                className="text-sm font-medium text-[var(--color-fg)]/80 hover:text-[var(--color-accent)] transition-colors py-2"
+                className={`text-sm font-medium transition-colors py-2 ${linkBase}`}
               >
                 {item.label}
               </Link>
@@ -69,10 +76,17 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
-          <a href={`tel:${site.contact.phoneHref}`} className="text-sm text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">
+          <a
+            href={`tel:${site.contact.phoneHref}`}
+            className={`text-sm transition-colors ${
+              solid
+                ? "text-[var(--color-muted)] hover:text-[var(--color-accent)]"
+                : "text-white/75 hover:text-white"
+            }`}
+          >
             {site.contact.phone}
           </a>
-          <Link href="/kontakt" className="btn btn-primary">
+          <Link href="/kontakt" className={`btn ${solid ? "btn-primary" : "btn-ghost-light"}`}>
             Anfrage
           </Link>
         </div>
@@ -83,15 +97,27 @@ export default function Header() {
           aria-label="Menü"
           aria-expanded={open}
         >
-          <span className={`h-[2px] w-6 bg-[var(--color-fg)] transition-all ${open ? "translate-y-[7px] rotate-45" : ""}`} />
-          <span className={`h-[2px] w-6 bg-[var(--color-fg)] transition-all ${open ? "opacity-0" : ""}`} />
-          <span className={`h-[2px] w-6 bg-[var(--color-fg)] transition-all ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
+          <span
+            className={`h-[2px] w-6 transition-all ${
+              solid ? "bg-[var(--color-fg)]" : "bg-white"
+            } ${open ? "translate-y-[7px] rotate-45" : ""}`}
+          />
+          <span
+            className={`h-[2px] w-6 transition-all ${
+              solid ? "bg-[var(--color-fg)]" : "bg-white"
+            } ${open ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`h-[2px] w-6 transition-all ${
+              solid ? "bg-[var(--color-fg)]" : "bg-white"
+            } ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
+          />
         </button>
       </div>
 
       {/* Mobile-Drawer */}
       <div
-        className={`lg:hidden fixed inset-0 top-[76px] bg-white transition-all duration-500 ${
+        className={`lg:hidden fixed inset-0 top-[84px] bg-white transition-all duration-500 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
@@ -110,7 +136,11 @@ export default function Header() {
             <a href={`tel:${site.contact.phoneHref}`} className="btn btn-ghost justify-center">
               {site.contact.phone}
             </a>
-            <Link href="/kontakt" onClick={() => setOpen(false)} className="btn btn-primary justify-center">
+            <Link
+              href="/kontakt"
+              onClick={() => setOpen(false)}
+              className="btn btn-primary justify-center"
+            >
               Jetzt anfragen
             </Link>
           </div>

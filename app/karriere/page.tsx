@@ -4,7 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import BewerbungForm from "@/components/BewerbungForm";
-import { site } from "@/lib/site";
+import { site, lehrjahrStart } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Karriere & Ausbildung",
@@ -16,7 +16,7 @@ const paths = [
   {
     title: "Ausbildung zum Werkzeugmechaniker",
     text: "Der Beruf des Werkzeugmechanikers stellt die höchste Stufe der Metallbearbeitung dar. Du lernst konventionelles und CNC-Drehen, Fräsen, Schleifen sowie CAD/CAM-Programmierung. Ausbildungszeit: 3,5 Jahre, Berufsfachschule Herzogenaurach, überbetrieblich bei der IHK Nürnberg.",
-    img: "/img/karriere.jpg",
+    img: "/img/cnc-drehen.jpg",
     tag: "Ausbildung · 3,5 Jahre",
   },
   {
@@ -46,8 +46,22 @@ export default function KarrierePage() {
         eyebrow="Karriere"
         title="Wir suchen"
         accent="Dich"
-        subtitle="Wir bieten dem interessierten Nachwuchs Einblicke und Ausbildung – und sichern uns so optimal gebildete Mitarbeiter für die Zukunft. Das neue Lehrjahr beginnt am 01.09.2026."
+        subtitle="Wir bieten dem interessierten Nachwuchs Einblicke und Ausbildung – und sichern uns so optimal gebildete Mitarbeiter für die Zukunft."
+        image="/img/karriere.jpg"
+        imageAlt="Junger Techniker prüft ein Präzisionsteil mit dem Messschieber"
       />
+
+      {/* Lehrjahr-Banner */}
+      <div className="bg-[var(--color-amber)]">
+        <div className="container-x flex flex-wrap items-center justify-between gap-4 py-4">
+          <p className="font-display text-lg text-white">
+            Das neue Lehrjahr beginnt am {lehrjahrStart}
+          </p>
+          <a href="#bewerbung" className="btn btn-white !text-[var(--color-amber)]">
+            Jetzt bewerben
+          </a>
+        </div>
+      </div>
 
       <section className="section-y">
         <div className="container-x grid gap-6 lg:grid-cols-2">
